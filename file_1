@@ -1,0 +1,155 @@
+#include <string.h>
+
+#include "orderedArrayListType.h"
+
+using namespace std;
+
+template<class candidateType>
+
+class candidateListType : public orderedArrayListType<candidateType>
+
+{
+
+public:
+
+     orderedArrayListType<candidateType>& cList;
+
+     orderedArrayListType<candidateType>::iterator;
+
+     //default constructor
+
+     candidateListType()
+
+     {
+
+          cList = new
+
+              orderedArrayListType<candidateType>(100);
+
+     }
+
+     //constructor
+
+     candidateListType(int size)
+
+     {
+
+          cList = new
+
+              orderedArrayListType<candidateType>(size);
+
+     }
+
+     // Function to update the number of votes for a
+
+     // particular candidate for a particular region.
+
+     //Post condition: The name of the candidate, the
+
+     // region, and the number of votes is passed as
+
+     // parameters.
+
+     void processVotes(string fName, string lName, int
+
+          region, int votes)
+
+     {
+
+          candidateType temp;
+
+          temp.setName(fName, lName);
+
+          temp.setVotes(region, votes);
+
+          it = orderedArrayListType.end();
+
+          orderedArrayListType.insert(it, temp);
+
+     }
+
+     //Function to find the total number of votes received
+
+     // by each candidate. Printing total votes data
+
+     void addVotes()
+
+     {
+
+          for (it = orderedArrayListType.begin(); it !=
+
+              orderedArrayListType.end(); ++it)
+
+          {
+
+              cout << *it.printData();
+
+          }
+
+     }
+
+     // Function to output the voting data.
+
+     //printing results
+
+     void printResult()
+
+     {
+
+          candidateListType temp;
+
+          int largestVotes = 0;
+
+          int sumVotes = 0;
+
+          int winLoc = 0;
+
+          int NO_OF_CANDIDATES =
+
+              orderedArrayListType.end();
+
+          for (int i = 0; i < NO_OF_CANDIDATES; i++)
+
+          {
+
+              orderedArrayListType.retrieveAt(i, temp);
+
+              temp.printData();
+
+              sumVotes += temp.getTotalVotes();
+
+              if (largestVotes < temp.getTotalVotes())
+
+              {
+
+                   largestVotes = temp.getTotalVotes();
+
+                   winLoc = i;
+
+              }
+
+          }
+
+          orderedArrayListType.retrieveAt(winLoc, temp);
+
+          cout << endl << endl << "Winner: ";
+
+          string firstN;
+
+          string lastN;
+
+          cout << temp.getFirstName() << " "
+
+              << temp.getLastName();
+
+          cout << ", Votes Received: "
+
+              << temp.getTotalVotes() << endl << endl;
+
+          cout << "Total votes polled: " << sumVotes
+
+              << endl;
+
+     }
+
+};
